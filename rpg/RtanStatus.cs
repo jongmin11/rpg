@@ -10,7 +10,8 @@
         private static int health = 100;
         private static int gold = 1500;
 
-        public static int Level
+        public static int Level //Property 클래스의 필드 값을 읽거나 쓸 때 사용하는 코드
+                                // 외부에서 필드에 직접 접근하지 않고 안전하게 값을 관리하도록 도와줌
         {
             get => level;
             set
@@ -69,7 +70,6 @@
             Console.WriteLine($"방어력: {defense}");
             Console.WriteLine($"체력: {health}");
             Console.WriteLine($"Gold: {gold}");
-            
             Console.ForegroundColor= ConsoleColor.Yellow;
             Console.WriteLine("\n\n0. 나가기");
             Console.ResetColor();
@@ -77,23 +77,18 @@
             Console.ForegroundColor= ConsoleColor.Yellow;
             Console.Write(">>");
             Console.ResetColor();
+            string? exit = Console.ReadLine();
 
             while (true)
             {
-                string exit = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(exit) && sbyte.TryParse(exit, out sbyte choice))
                 {
                     if (choice == 0)
                     {
                         break;
                     }
-
-
-
                 }
             }
-            
-
         }
     }
 }

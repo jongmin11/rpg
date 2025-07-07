@@ -18,9 +18,13 @@
                 Console.WriteLine("3.\t상점");
                 Console.WriteLine("\'exit\'  게임종료");
                 Console.WriteLine("\n\n어떤 행동을 하시겟습니까?");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("=====================================================================================");
+                Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(">>");
                 Console.ResetColor();
+                
                 string? pick = Console.ReadLine();//string?은 null 가능성을 고려한 안전한 선언
 
                 if (!string.IsNullOrWhiteSpace(pick))
