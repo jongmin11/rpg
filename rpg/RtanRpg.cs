@@ -1,8 +1,8 @@
 ﻿namespace rpg
-{ 
+{
     class RtanRpg
     {
-        static void Main(String[] args) 
+        static void Main(String[] args)
         {
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다 \n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
             Console.WriteLine("\n");
@@ -16,7 +16,7 @@
             string? pick = Console.ReadLine(); //[string?] string이 null이될수잇음을 확인
 
             //[!string.IsNullOrWhiteSpace(pick)]pick이 비어있거나 공백만 있는 게 아니면 true
-            if (!string.IsNullOrWhiteSpace(pick) && sbyte.TryParse(pick, out sbyte choice))  
+            if (!string.IsNullOrWhiteSpace(pick) && sbyte.TryParse(pick, out sbyte choice))
             {
                 switch (choice)
                 {
@@ -38,11 +38,15 @@
             {
                 Console.WriteLine("숫자를 입력해주세요.");
             }
+
+            while (true) //콘솔에 exit 쓰기전까지 절대 안꺼짐
+            {
+                string input = Console.ReadLine();
+                if (input == "exit") break;
+                                            
+            }
         }
     }
-
-
-
 }
 
 
