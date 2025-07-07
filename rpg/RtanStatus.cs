@@ -1,16 +1,16 @@
 ﻿namespace rpg
 {
-    public static class RtanStatus
+    public class RtanStatus
     {
-        private static int level = 1;
-        private static string name = "르탄";
-        private static string job = "전사";
-        private static int attack = 10;
-        private static int defense = 5;
-        private static int health = 100;
-        private static int gold = 1500;
+        private int level = 1;
+        private string name = "르탄";
+        private string job = "전사";
+        private int attack = 10;
+        private int defense = 5;
+        private int health = 100;
+        private int gold = 1500;
 
-        public static int Level //Property 클래스의 필드 값을 읽거나 쓸 때 사용하는 코드
+        public int Level //Property 클래스의 필드 값을 읽거나 쓸 때 사용하는 코드
                                 // 외부에서 필드에 직접 접근하지 않고 안전하게 값을 관리하도록 도와줌
         {
             get => level;
@@ -20,27 +20,27 @@
                     level = value;
             }
         }
-        public static string Name
+        public string Name
         {
             get => name;
             set => name = value;
         }
-        public static string Job
+        public string Job
         {
             get => job;
             set => job = value;
         }
-        public static int Attack
+        public int Attack
         {
             get => attack;
             set => attack = value;
         }
-        public static int Defense
+        public int Defense
         {
             get => defense;
             set => defense = value;
         }
-        public static int Health
+        public int Health
         {
             get => health;
             set
@@ -53,12 +53,12 @@
                     health = value;
             }
         }
-        public static int Gold
+        public int Gold
         {
             get => gold;
             set => gold = value;
         }
-        public static void Show()
+        public void Show()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("상태 보기");

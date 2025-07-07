@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 namespace rpg
 {  
-    public static class RtanInven
+    public class RtanInven
     {
-        public static void Show()
+        public void Show()
         {
             Console.WriteLine("인밴토리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
@@ -25,6 +25,10 @@ namespace rpg
                     if (choice == 0)
                     {
                         break;
+                    }
+                    else if (choice == 1)
+                    {
+                        
                     }
                     else
                     {
