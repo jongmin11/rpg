@@ -1,13 +1,18 @@
 ﻿using System.Security.Cryptography;
-
-namespace rtan
+namespace rpg
 {
     
-    class Rpg
+    public static class RtanInven
     {
-        
-        
-      
+        public static void Show()
+        {
+
+
+
+        }
+
+
+
     }
 
 
