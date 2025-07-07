@@ -3,7 +3,7 @@
     public static class RtanStatus
     {
         private static int level = 1;
-        private static string name = "Chad";
+        private static string name = "르탄";
         private static string job = "전사";
         private static int attack = 10;
         private static int defense = 5;
@@ -63,7 +63,37 @@
             Console.WriteLine("상태 보기");
             Console.ResetColor();
             Console.WriteLine("현재 나의 캐릭터 상태");
-            Console.WriteLine($"Lv [level]");
+            Console.WriteLine($"Lv. {level}");
+            Console.WriteLine($"이름:{Name} 직업:{(job)}");
+            Console.WriteLine($"공격력: {attack}");
+            Console.WriteLine($"방어력: {defense}");
+            Console.WriteLine($"체력: {health}");
+            Console.WriteLine($"Gold: {gold}");
+            
+            Console.ForegroundColor= ConsoleColor.Yellow;
+            Console.WriteLine("\n\n0. 나가기");
+            Console.ResetColor();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.ForegroundColor= ConsoleColor.Yellow;
+            Console.Write(">>");
+            Console.ResetColor();
+
+            while (true)
+            {
+                string exit = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(exit) && sbyte.TryParse(exit, out sbyte choice))
+                {
+                    if (choice == 0)
+                    {
+                        break;
+                    }
+
+
+
+                }
+            }
+            
+
         }
     }
 }
