@@ -77,18 +77,27 @@
             Console.ForegroundColor= ConsoleColor.Yellow;
             Console.Write(">>");
             Console.ResetColor();
-            string? exit = Console.ReadLine();
-
+  
             while (true)
             {
+                string? exit = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(exit) && sbyte.TryParse(exit, out sbyte choice))
                 {
                     if (choice == 0)
                     {
                         break;
                     }
+                    else
+                    {
+                        Console.WriteLine("올바른 번호를 입력하세요.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("숫자를 입력해 주세요.");
                 }
             }
+            
         }
     }
 }
