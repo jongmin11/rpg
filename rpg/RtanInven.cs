@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Reflection.Metadata;
+using System.Security.Cryptography;
 namespace rpg
 {  
     
@@ -43,6 +44,29 @@ namespace rpg
                 }
             }
         }
+
+        public class RtanItem
+        {
+            public string Name;
+            public string Description;
+            public int Attack;
+            public int Defense;
+
+            public RtanItem(string name, string desc, int atk, int def) 
+            {
+                Name = name;
+                Description = desc;
+                Attack = atk;
+                Defense = def;
+            }
+
+
+        }
+
+
+
+
+
     }
 }
 
