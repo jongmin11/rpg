@@ -1,8 +1,8 @@
 ﻿namespace rpg
 {
-    public static class RtanShop
+    public class RtanShop
     {
-        public static void Show()
+        public void Show()
         {
             
         }

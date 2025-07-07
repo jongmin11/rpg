@@ -4,6 +4,7 @@
     {
         static void Main(String[] args)
         {
+            
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -40,13 +41,16 @@
                         switch (choice)
                         {
                             case 1:
-                                RtanStatus.Show();
+                                RtanStatus status = new RtanStatus();
+                                status.Show();
                                 break;
                             case 2:
-                                RtanInven.Show();
+                                RtanInven Inven = new RtanInven();
+                                Inven.Show();
                                 break;
                             case 3:
-                                RtanShop.Show();
+                                RtanShop Shop = new RtanShop();
+                                Shop.Show();
                                 break;
                             default:
                                 Console.WriteLine("올바른 선택이 아닙니다.");
