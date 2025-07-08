@@ -3,6 +3,20 @@
     public class RtanShop
     {
         private bool[] purchased = new bool[ItemDB.Items.Count];
+        public RtanShop()
+        {
+            for (int i = 0; i < GameData.Inventory.Count; i++)
+            { 
+                var invItem = GameData.Inventory[i].ItemData;
+                for (int j = 0; j < ItemDB.Items.Count; j++)
+                { 
+                    if (invItem == ItemDB.Items[j])
+                    {
+                        purchased[j] = true;
+                    }
+                }
+            }
+        }
         public void Show()
         {
             while (true)
@@ -25,7 +39,7 @@
 
                 Console.WriteLine("\n0. 나가기");
                 Console.WriteLine("\n구매할 아이템번호를 입력하세요.");
-                Console.ForegroundColor= ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(">>");
                 Console.ResetColor();
 
@@ -35,7 +49,7 @@
                 {
                     if (choice == 0)
                     {
-                        break;                    
+                        break;
                     }
                     else if (choice > 0 && choice <= ItemDB.Items.Count)
                     {
@@ -49,7 +63,7 @@
                         }
                         else if (GameData.Player.Gold >= price)
                         {
-                            GameData.Player.Gold = price;
+                            GameData.Player.Gold -= price; 
                             GameData.Inventory.Add(new RtanInven.RtanItem(item));
                             purchased[index] = true;
                             Console.WriteLine($"{item.Name} 구매 완료! 남은 Gold: {GameData.Player.Gold}");
