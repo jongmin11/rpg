@@ -20,7 +20,7 @@
 
                     string status = purchased[i] ? "**구매완료**" : $"가격: {price} Gold";
 
-                    Console.WriteLine($"{i + 1}. {item.Name} l {item.Description} l 공격력 +{item.Attack} l 방어력 +{item.Defense} l {status}");
+                    Console.WriteLine($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {status}");
                 }
 
                 Console.WriteLine("\n0. 나가기");
@@ -29,16 +29,44 @@
                 Console.Write(">>");
                 Console.ResetColor();
 
-                if (int.TryParse(input, out int choice))
+                string? input = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(input) && int.TryParse(input, out int choice))
                 {
                     if (choice == 0)
                     {
-                        break;
+                        break;                    
                     }
-                    else if (choice == 1) 
+                    else if (choice > 0 && choice <= ItemDB.Items.Count)
                     {
+                        int index = choice - 1;
+                        var item = ItemDB.Items[index];
+                        int price = (item.Attack + item.Defense) * 100;
 
+                        if (purchased[index])
+                        {
+                            Console.WriteLine("이미 구매한 아이템 입니다.");
+                        }
+                        else if (GameData.Player.Gold >= price)
+                        {
+                            GameData.Player.Gold = price;
+                            GameData.Inventory.Add(new RtanInven.RtanItem(item));
+                            purchased[index] = true;
+                            Console.WriteLine($"{item.Name} 구매 완료! 남은 Gold: {GameData.Player.Gold}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Gold가 부족합니다.");
+                        }
                     }
+                    else
+                    {
+                        Console.WriteLine("잘못된 입력입니다.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
                 }
             }
         }
