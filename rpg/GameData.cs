@@ -3,7 +3,7 @@
     public static class GameData
     {
         public static RtanStatus Player = new RtanStatus();
-        public static List<RtanInven> Inventory = new List<RtanInven>();
+        public static List<RtanInven.RtanItem> Inventory = new List<RtanInven.RtanItem>();
 
 
     }
