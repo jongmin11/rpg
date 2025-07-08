@@ -58,16 +58,51 @@
             get => gold;
             set => gold = value;
         }
+        public (int totalAttack, int totalDefence) GetTotalStats()
+        {
+            int totalAttack = attack;
+            int totalDefence = defense;
+
+            foreach (var invItem in GameData.Inventory)
+            {
+                if (invItem.IsEquipped)
+                {
+                    totalAttack += invItem.ItemData.Attack;
+                    totalDefence += invItem.ItemData.Defense;
+                }
+            }
+
+            return (totalAttack, totalDefence);
+        }
         public void Show()
         {
+            var (totalAttack, totalDefence) = GetTotalStats();
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("상태 보기");
             Console.ResetColor();
             Console.WriteLine("현재 나의 캐릭터 상태");
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"이름:{Name} 직업:{(job)}");
-            Console.WriteLine($"공격력: {attack}");
-            Console.WriteLine($"방어력: {defense}");
+
+            if(totalAttack != attack)
+            {
+                Console.WriteLine($"공격력: {totalAttack} ({attack} + {totalAttack - attack})");
+            }
+            else
+            {
+                Console.WriteLine($"공격력: {attack}");
+            }
+
+            if (totalDefence != defense)
+            {
+                Console.WriteLine($"방어력: {totalDefence} ({defense} + {totalDefence - defense})");
+            }
+            else
+            {
+                Console.WriteLine($"방어력: {defense}");
+            }
+
             Console.WriteLine($"체력: {health}");
             Console.WriteLine($"Gold: {gold}");
             Console.ForegroundColor= ConsoleColor.Yellow;
@@ -97,7 +132,6 @@
                     Console.WriteLine("숫자를 입력해 주세요.");
                 }
             }
-            
         }
     }
 }

@@ -4,7 +4,6 @@
     {
         static void Main(String[] args)
         {
-            
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;

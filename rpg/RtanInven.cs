@@ -53,6 +53,14 @@ namespace rpg
         private void ShowEquipMenu()
         {
             Console.WriteLine("\n장착 관리");
+            for (int i = 0; i < GameData.Inventory.Count; i++)
+            {
+                var invItem = GameData.Inventory[i];
+                var item = invItem.ItemData;
+                string equipMark = invItem.IsEquipped ? "[E] " : "";
+                Console.WriteLine($"- {i + 1} {equipMark}{item.Name} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
+            }
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\n\n0. 뒤로 가기");
             Console.ResetColor();
@@ -60,14 +68,6 @@ namespace rpg
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(">>");
             Console.ResetColor();
-            
-            for (int i = 0; i < GameData.Inventory.Count; i++)
-            { 
-                var invItem = GameData.Inventory[i];
-                var item = invItem.ItemData;
-                string equipMark = invItem.IsEquipped ? "[E] " : "";
-                Console.WriteLine($"- {i + 1} {equipMark}{item.Name} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
-            }
             
             string? input = Console.ReadLine();
 
@@ -77,30 +77,55 @@ namespace rpg
                 {
                     return;
                 }
-                else if (index > 0 && index < GameData.Inventory.Count)
+                else if (index > 0 && index <= GameData.Inventory.Count)
                 {
                     var invItem = GameData.Inventory[index - 1];
-                    invItem.IsEquipped = !invItem.IsEquipped;
+                    var item = invItem.ItemData;
 
                     if (invItem.IsEquipped)
                     {
-                        Console.WriteLine($"{invItem.ItemData.Name}을(를) 장착했습니다.");
+                        Console.WriteLine($"{item.Name}은(는) 현재 장착중입니다. 헤제하시겠습니까? (Y/N)");
                     }
                     else
                     {
-                        Console.WriteLine($"{invItem.ItemData.Name}을(를) 장착해제했습니다..");
+                        Console.WriteLine($"{item.Name}을(를) 장착하시겠습니까? (Y/N)");
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(">>");
+                    Console.ResetColor();
+
+                    string? confirm = Console.ReadLine();
+
+                    if (!string.IsNullOrWhiteSpace(confirm) && confirm.ToUpper() == "Y")
+                    {
+                        invItem.IsEquipped = !invItem.IsEquipped;
+
+                        if (invItem.IsEquipped)
+                        {
+                            Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{item.Name}을(를) 장착해제했습니다.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("작업이 취소되었습니다.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("잘못된 입력입니다");
+                    Console.WriteLine("잘못된 입력입니다.");
                 }
             }
             else
-            {
-                Console.WriteLine("숫자를 입력해주세요");
+            { 
+                Console.WriteLine("숫자를 입력해주세요.");
             }
         }
+        
          public class RtanItem
          {
             public RtanItemDB ItemData;
