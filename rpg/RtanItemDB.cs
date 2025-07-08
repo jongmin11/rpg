@@ -15,8 +15,6 @@ namespace rpg
                 Defense = def;
         }
     }
-
-
     public static class ItemDB
     {
         public static List<RtanItemDB> Items = new List<RtanItemDB>()

@@ -49,15 +49,57 @@ namespace rpg
                     Console.WriteLine("숫자를 입력해 주세요.");
                 }
             }
-        
         }
         private void ShowEquipMenu()
         {
+            Console.WriteLine("\n장착 관리");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n\n0. 뒤로 가기");
+            Console.ResetColor();
+            Console.WriteLine("\n\n어떤 행동을 하시겟습니까?");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(">>");
+            Console.ResetColor();
+            
+            for (int i = 0; i < GameData.Inventory.Count; i++)
+            { 
+                var invItem = GameData.Inventory[i];
+                var item = invItem.ItemData;
+                string equipMark = invItem.IsEquipped ? "[E] " : "";
+                Console.WriteLine($"- {i + 1} {equipMark}{item.Name} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
+            }
+            
+            string? input = Console.ReadLine();
 
+            if (int.TryParse(input, out int index))
+            {
+                if (index == 0)
+                {
+                    return;
+                }
+                else if (index > 0 && index < GameData.Inventory.Count)
+                {
+                    var invItem = GameData.Inventory[index - 1];
+                    invItem.IsEquipped = !invItem.IsEquipped;
 
-
-
-
+                    if (invItem.IsEquipped)
+                    {
+                        Console.WriteLine($"{invItem.ItemData.Name}을(를) 장착했습니다.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{invItem.ItemData.Name}을(를) 장착해제했습니다..");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다");
+                }
+            }
+            else
+            {
+                Console.WriteLine("숫자를 입력해주세요");
+            }
         }
          public class RtanItem
          {

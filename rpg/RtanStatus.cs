@@ -20,7 +20,7 @@
                     level = value;
             }
         }
-        public string Name
+        private string Name
         {
             get => name;
             set => name = value;
