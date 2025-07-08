@@ -40,8 +40,7 @@
                         switch (choice)
                         {
                             case 1:
-                                RtanStatus status = new RtanStatus();
-                                status.Show();
+                                GameData.Player.Show();
                                 break;
                             case 2:
                                 RtanInven Inven = new RtanInven();

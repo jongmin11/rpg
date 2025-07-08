@@ -19,9 +19,10 @@ namespace rpg
     {
         public static List<RtanItemDB> Items = new List<RtanItemDB>()
         {
+            new RtanItemDB("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다 기본 지급 장비입니다.", 2, 0),
             new RtanItemDB("무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 5),
-            new RtanItemDB("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", 7, 0),
-            new RtanItemDB("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다 기본 지급 장비입니다.", 2, 0)
+            new RtanItemDB("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", 7, 0)
+            
         };
     }
 }
