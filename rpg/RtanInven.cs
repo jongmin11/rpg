@@ -67,15 +67,9 @@ namespace rpg
                     invItem.IsEquipped = !isEquipped;
                     Console.WriteLine($"{item.Name} {(invItem.IsEquipped ? "장착" : "장착 해제")}되었습니다.");
                 }
-                else
-                {
-                    Console.WriteLine("작업이 취소되엇습니다.");
-                }
+                else {Console.WriteLine("작업이 취소되엇습니다.");}
             }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-            }
+            else {Console.WriteLine("잘못된 입력입니다.");}
         }
 
         private void PrintItemList()
@@ -126,7 +120,6 @@ namespace rpg
         {
             public RtanItemDB ItemData { get; }
             public bool IsEquipped { get; set; }
-
             public RtanItem(RtanItemDB itemData)
             {
                 ItemData = itemData;
