@@ -7,7 +7,7 @@
             while (true)
             {
                 PrintBannerAndMenu();
-                string? pick = GetInpit();
+                string? pick = GetInput();
 
                 if (string.IsNullOrWhiteSpace(pick))
                 {
@@ -70,7 +70,7 @@
             Console.ResetColor();
         }
 
-        static string? GetInpit()
+        static string? GetInput()
         {
             PrintPrompt();
             return Console.ReadLine();

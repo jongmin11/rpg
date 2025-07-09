@@ -56,7 +56,7 @@ namespace rpg
                 Console.WriteLine(
                     isEquipped
                         ? $"{item.Name}은(는) 현재 장착중입니다. 해제하시겠습니까? (Y/N)"
-                        : $"{item.Name}을(를) 장작하시겠습니까? (Y/N)"
+                        : $"{item.Name}을(를) 장착하시겠습니까? (Y/N)"
                 );
 
                 PrintPrompt();
