@@ -47,7 +47,7 @@
         public int Gold
         {
             get => gold;
-            set => gold = value;
+            set => gold = value < 0 ? 0 : value;
         }
         public (int totalAttack, int totalDefence) GetTotalStats()
         {

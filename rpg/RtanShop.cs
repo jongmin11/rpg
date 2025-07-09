@@ -104,9 +104,9 @@ namespace rpg
             }
 
             GameData.Player.Gold -= price;
-            GameData.Inventory.Add(new RtanInven.RtanItem(item));
+            GameData.AddItem(item);
             purchased[index] = true;
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}");
             Console.ResetColor();
         }

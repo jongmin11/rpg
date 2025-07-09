@@ -47,11 +47,27 @@ namespace rpg
 
             if (index == 0) return;
 
+            var sortedList = GameData.Inventory
+                .OrderByDescending(i => i.IsEquipped)
+                .ToList();
+
             if (index > 0 && index <= GameData.Inventory.Count)
             {
                 var invItem = GameData.Inventory[index - 1];
                 var item = invItem.ItemData;
                 bool isEquipped = invItem.IsEquipped;
+
+                if (!isEquipped)
+                { 
+                    bool slotConflict = GameData.Inventory.Any(i => i.IsEquipped && i.ItemData.Slot == item.Slot);
+                    if (slotConflict)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine($"이미 {item.Slot} 슬롯아이템이 장착되어 있습니다.");
+                        Console.ResetColor();
+                        return;
+                    }
+                }
 
                 Console.WriteLine(
                     isEquipped
@@ -75,6 +91,11 @@ namespace rpg
         private void PrintItemList()
         {
             Console.WriteLine("\n[아이템 목록]");
+
+            var sorted = GameData.Inventory
+                .OrderByDescending(i => i.IsEquipped)
+                .ToList();
+
             for (int i = 0; i < GameData.Inventory.Count; i++)
             {
                 var invItem = GameData.Inventory[i];
@@ -89,11 +110,9 @@ namespace rpg
                     Console.ResetColor();
                 }
 
-                Console.WriteLine($"{item.Name}| 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
-
+                Console.WriteLine($"{item.Name}| 슬롯: {item.Slot} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
             }
         }
-        
         private void PrintOption(string option)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
