@@ -63,19 +63,8 @@
             Console.ResetColor();
         }
 
-        static void PrintPrompt()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(">>");
-            Console.ResetColor();
-        }
-
-        static string? GetInput()
-        {
-            PrintPrompt();
-            return Console.ReadLine();
-        }
-
+        static void PrintPrompt() => ConsoleHelper.PrintPrompt();
+        static string? GetInput() => ConsoleHelper.GetInput();
     }
 }
                 

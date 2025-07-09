@@ -35,7 +35,7 @@ namespace rpg
             Console.WriteLine("\n장착 관리");
             PrintItemList();
 
-            PrintOption("0. 뒤로 가기");
+            PrintOption("\n0. 뒤로 가기");
 
             string? input = GetInput();
 
@@ -51,41 +51,67 @@ namespace rpg
                 .OrderByDescending(i => i.IsEquipped)
                 .ToList();
 
-            if (index > 0 && index <= GameData.Inventory.Count)
+            if (index > 0 && index <= sortedList.Count)
             {
-                var invItem = GameData.Inventory[index - 1];
+                var invItem = sortedList[index - 1];
                 var item = invItem.ItemData;
                 bool isEquipped = invItem.IsEquipped;
 
                 if (!isEquipped)
-                { 
-                    bool slotConflict = GameData.Inventory.Any(i => i.IsEquipped && i.ItemData.Slot == item.Slot);
-                    if (slotConflict)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.WriteLine($"이미 {item.Slot} 슬롯아이템이 장착되어 있습니다.");
-                        Console.ResetColor();
-                        return;
-                    }
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"{item.Name}을(를) 장착하시겠습니까? (Y/N)");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"{item.Name}을(를) 해제하시겠습니까? (Y/N)");
+                    Console.ResetColor();
                 }
 
-                Console.WriteLine(
-                    isEquipped
-                        ? $"{item.Name}은(는) 현재 장착중입니다. 해제하시겠습니까? (Y/N)"
-                        : $"{item.Name}을(를) 장착하시겠습니까? (Y/N)"
-                );
-
-                PrintPrompt();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(">>");
+                Console.ResetColor();
                 string? confirm = Console.ReadLine();
 
                 if (confirm?.ToUpper() == "Y")
                 {
-                    invItem.IsEquipped = !isEquipped;
-                    Console.WriteLine($"{item.Name} {(invItem.IsEquipped ? "장착" : "장착 해제")}되었습니다.");
+                   if (!isEquipped)
+                   { 
+                     foreach (var i in GameData.Inventory)
+                     {
+                        if (i.IsEquipped && i.ItemData.Slot == item.Slot)
+                        {
+                            i.IsEquipped = false;
+                            Console.ForegroundColor= ConsoleColor.Yellow;
+                            Console.WriteLine($"기존 {i.ItemData.Name}이(가) 해제되었습니다.");
+                            Console.ResetColor();
+                        }
+                     }
+
+                        invItem.IsEquipped = true;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"{item.Name}이(가) 장착되었습니다.");
+                        Console.ResetColor();
+                   }
+                   else
+                   {
+                        invItem.IsEquipped = false;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"{item.Name}이(가) 해제되었습니다.");
+                        Console.ResetColor();
+                   }
                 }
-                else {Console.WriteLine("작업이 취소되엇습니다.");}
+                else
+                { 
+                    Console.WriteLine("작업이 취소되었습니다.");
+                }
             }
-            else {Console.WriteLine("잘못된 입력입니다.");}
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+            }
         }
 
         private void PrintItemList()
@@ -113,27 +139,9 @@ namespace rpg
                 Console.WriteLine($"{item.Name}| 슬롯: {item.Slot} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");
             }
         }
-        private void PrintOption(string option)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\n{option}");
-            Console.ResetColor();
-            Console.WriteLine("\n어떤 행동을 하시겠습니까?");
-
-        }
-
-        private void PrintPrompt()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(">>");
-            Console.ResetColor();
-        }
-
-        private string? GetInput()
-        {
-            PrintPrompt();
-            return Console.ReadLine();
-        }
+        private void PrintOption(string option) => ConsoleHelper.PrintOption(option);
+        private void PrintPrompt() => ConsoleHelper.PrintPrompt();
+        private string? GetInput() => ConsoleHelper.GetInput();
 
         public class RtanItem
         {

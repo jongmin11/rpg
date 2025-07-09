@@ -19,7 +19,7 @@ namespace rpg
                 Console.WriteLine($" {GameData.Player.Gold}");
                 Console.ResetColor();
                 PrintShopItems();
-                PrintOption("0. 나가기");
+                PrintOption("\n0. 나가기");
                 Console.WriteLine("\n구매할 아이템번호를 입력하세요");
                 string? input = GetInput();
 
@@ -111,27 +111,20 @@ namespace rpg
         }
         private void PrintOption(string option)
         { 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\n{option}");
-            Console.ResetColor();
+            ConsoleHelper.PrintOption(option);
         }
         private void PrintPrompt()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(">> ");
-            Console.ResetColor();
+            ConsoleHelper.PrintPrompt();
         }
         private string? GetInput()
         {
-            PrintPrompt();
-            return Console.ReadLine();
+            return ConsoleHelper.GetInput();
         }
 
         private string Highlight(string text, ConsoleColor color)
         {
-            Console.ForegroundColor = color;
-            Console.Write(text);
-            Console.ResetColor();
+            ConsoleHelper.Highlight(text, color);
             return "";
         }
     }

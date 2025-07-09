@@ -88,8 +88,7 @@
                     Console.WriteLine($"{invItem.ItemData.Name} ({invItem.ItemData.Slot})");
                 }
             }
-            PrintOption("0. 나가기");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            PrintOption("\n0. 나가기\n");
 
             while (true)
             {
@@ -110,23 +109,10 @@
                 }
             }
         }
-        private void PrintOption(string option)
-        {
-            Console.ForegroundColor= ConsoleColor.Yellow;
-            Console.WriteLine($"\n{option}");
-            Console.ResetColor();
-        }
-        private void PrintPrompt()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(">>");
-            Console.ResetColor();
-        }
-        private string? GetInput()
-        {
-            PrintPrompt();
-            return Console.ReadLine();
-        }
+
+        private void PrintOption(string option) => ConsoleHelper.PrintOption(option);
+        private void PrintPrompt() => ConsoleHelper.PrintPrompt();
+        private string? GetInput() => ConsoleHelper.GetInput();
     }
 }
 
