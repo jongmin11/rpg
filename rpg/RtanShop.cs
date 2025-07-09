@@ -12,7 +12,9 @@ namespace rpg
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("====================상점====================");
                 Console.ResetColor();
-                Console.Write("\t\tGold:");
+                Console.ForegroundColor = ConsoleColor.White; 
+                Console.Write("\t\t[보유 Gold]:");
+                Console.ResetColor();
                 Console.ForegroundColor= ConsoleColor.Yellow;
                 Console.WriteLine($" {GameData.Player.Gold}");
                 Console.ResetColor();
