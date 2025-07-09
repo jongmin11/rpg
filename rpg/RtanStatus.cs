@@ -3,7 +3,7 @@
     public class RtanStatus
     {
         private int level = 1;
-        private string name = "르탄";
+        private string name = "Chad";
         private string job = "전사";
         private int attack = 10;
         private int defense = 5;
@@ -109,7 +109,6 @@
                 }
             }
         }
-
         private void PrintOption(string option) => ConsoleHelper.PrintOption(option);
         private void PrintPrompt() => ConsoleHelper.PrintPrompt();
         private string? GetInput() => ConsoleHelper.GetInput();

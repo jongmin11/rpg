@@ -4,7 +4,6 @@ namespace rpg
 {
     public class RtanShop
     {
-
         public void Show()
         {
             while (true)
@@ -121,7 +120,6 @@ namespace rpg
         {
             return ConsoleHelper.GetInput();
         }
-
         private string Highlight(string text, ConsoleColor color)
         {
             ConsoleHelper.Highlight(text, color);

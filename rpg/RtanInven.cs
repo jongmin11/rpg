@@ -11,10 +11,8 @@ namespace rpg
             {
                 Console.WriteLine("인밴토리\n보유 중인 아이템을 관리할 수 있습니다.\n");
                 PrintItemList();
-
                 Console.WriteLine("\n\n1. 장착 관리");
-                PrintOption("0. 나가기");
-
+                PrintOption("\n0. 나가기\n");
                 string? input = GetInput();
 
                 switch (input)
@@ -34,9 +32,7 @@ namespace rpg
         {
             Console.WriteLine("\n장착 관리");
             PrintItemList();
-
             PrintOption("\n0. 뒤로 가기");
-
             string? input = GetInput();
 
             if (!int.TryParse(input, out int index))
@@ -113,7 +109,6 @@ namespace rpg
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
-
         private void PrintItemList()
         {
             Console.WriteLine("\n[아이템 목록]");
