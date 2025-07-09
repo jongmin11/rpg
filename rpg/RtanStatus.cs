@@ -80,6 +80,14 @@
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{gold}");
             Console.ResetColor();
+            Console.WriteLine("[장착 중인 아이템]");
+            foreach (var invItem in GameData.Inventory)
+            {
+                if (invItem.IsEquipped)
+                {
+                    Console.WriteLine($"{invItem.ItemData.Name} ({invItem.ItemData.Slot})");
+                }
+            }
             PrintOption("0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 

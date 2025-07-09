@@ -96,9 +96,9 @@ namespace rpg
                 .OrderByDescending(i => i.IsEquipped)
                 .ToList();
 
-            for (int i = 0; i < GameData.Inventory.Count; i++)
+            for (int i = 0; i < sorted.Count; i++)
             {
-                var invItem = GameData.Inventory[i];
+                var invItem = sorted[i];
                 var item = invItem.ItemData;
 
                 Console.Write($"- {i + 1} ");

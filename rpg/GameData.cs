@@ -13,10 +13,10 @@
         public static bool AddItem(RtanItemDB item)
         {
             if (_inventory.Any(x => x.ItemData == item))
-                return false;
+            return false;
 
             _inventory.Add(new RtanInven.RtanItem(item));
-                return true;
+            return true;
         }
 
         public static void RemoveItem(RtanInven.RtanItem item)

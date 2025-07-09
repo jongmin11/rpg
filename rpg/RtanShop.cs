@@ -4,18 +4,7 @@ namespace rpg
 {
     public class RtanShop
     {
-        private bool[] purchased = new bool[ItemDB.Items.Count];
-        public RtanShop()
-        {
-           foreach (var invitem in GameData.Inventory)
-           {
-                for (int i = 0; i < ItemDB.Items.Count; i++)
-                { 
-                    if(invitem.ItemData == ItemDB.Items[i])
-                        purchased[i] = true;
-                }
-           }
-        }
+
         public void Show()
         {
             while (true)
@@ -23,9 +12,9 @@ namespace rpg
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("====================상점====================");
                 Console.ResetColor();
-                Console.Write("Gold:");
+                Console.Write("\t\tGold:");
                 Console.ForegroundColor= ConsoleColor.Yellow;
-                Console.WriteLine($"{GameData.Player.Gold}");
+                Console.WriteLine($" {GameData.Player.Gold}");
                 Console.ResetColor();
                 PrintShopItems();
                 PrintOption("0. 나가기");
@@ -58,16 +47,14 @@ namespace rpg
         private void PrintShopItems()
         {
             Console.ForegroundColor= ConsoleColor.White;
-            Console.WriteLine("\n[판매 목록]\n");
+            Console.WriteLine("\n\t\t[판매 목록]\n");
             Console.ResetColor();
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
                 int price = item.Price;
-                string status = purchased[i] 
-                    ? Highlight("[구매완료]", ConsoleColor.Green)
-                    : $"가격: {price} Gold";
-
+                bool isPurchased = GameData.Inventory.Any(x => x.ItemData == item);
+                string status = isPurchased ? Highlight("[구매완료]", ConsoleColor.Green) : $"가격: {price} Gold";
                 Console.WriteLine($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {status}");
             }
         }
@@ -76,7 +63,7 @@ namespace rpg
             var item = ItemDB.Items[index];
             int price = item.Price;
 
-            if (purchased[index])
+            if (GameData.Inventory.Any(x => x.ItemData == item))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("이미 구매한 아이템입니다.");
@@ -84,7 +71,9 @@ namespace rpg
                 return;
             }
 
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"정말 {item.Name}을(를) 구매하시겠습니까? (Y/N)");
+            Console.ResetColor();
             PrintPrompt();
             string? confirm = Console.ReadLine();
 
@@ -104,11 +93,19 @@ namespace rpg
             }
 
             GameData.Player.Gold -= price;
-            GameData.AddItem(item);
-            purchased[index] = true;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}");
-            Console.ResetColor();
+            
+            if(GameData.AddItem(item))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine("이미 소지중인 아이템이라 구매가 불가능합니다!");
+                GameData.Player.Gold += price;
+            }
+  
         }
         private void PrintOption(string option)
         { 
