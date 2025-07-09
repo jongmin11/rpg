@@ -76,7 +76,10 @@
             Console.WriteLine($"공격력: {totalAttack} {(totalAttack != attack ? $"({attack} + {totalAttack - attack})" : "")}");
             Console.WriteLine($"방어력: {totalDefence} {(totalDefence != defense ? $"({defense} + {totalDefence - defense})" : "")}");
             Console.WriteLine($"체력: {health}");
-            Console.WriteLine($"Gold: {gold}");
+            Console.Write("Gold: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"{gold}");
+            Console.ResetColor();
             PrintOption("0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 

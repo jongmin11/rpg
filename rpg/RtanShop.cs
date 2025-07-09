@@ -23,13 +23,13 @@ namespace rpg
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("====================상점====================");
                 Console.ResetColor();
-
-                Console.WriteLine($"보유 Gold: {GameData.Player.Gold}");
+                Console.Write("Gold:");
+                Console.ForegroundColor= ConsoleColor.Yellow;
+                Console.WriteLine($"{GameData.Player.Gold}");
+                Console.ResetColor();
                 PrintShopItems();
-
                 PrintOption("0. 나가기");
                 Console.WriteLine("\n구매할 아이템번호를 입력하세요");
-
                 string? input = GetInput();
 
                 if (!int.TryParse(input, out int choice))
@@ -57,17 +57,20 @@ namespace rpg
         }
         private void PrintShopItems()
         {
-            Console.WriteLine("[판매 목록]");
+            Console.ForegroundColor= ConsoleColor.White;
+            Console.WriteLine("\n[판매 목록]\n");
+            Console.ResetColor();
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
                 int price = (item.Attack + item.Defense) * 100;
-                string status = purchased[i] ? "**[구매완료]**" : $"가격: {price} Gold";
+                string status = purchased[i] 
+                    ? Highlight("[구매완료]", ConsoleColor.Green)
+                    : $"가격: {price} Gold";
 
                 Console.WriteLine($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {status}");
             }
         }
-
         private void ProcessPurchase(int index)
         {
             var item = ItemDB.Items[index];
@@ -98,25 +101,30 @@ namespace rpg
             }
             else { Console.WriteLine("Gold가 부족합니다"); }
         }
-
         private void PrintOption(string option)
         { 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"\n{option}");
             Console.ResetColor();
         }
-
         private void PrintPrompt()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(">> ");
             Console.ResetColor();
         }
-
         private string? GetInput()
         {
             PrintPrompt();
             return Console.ReadLine();
+        }
+
+        private string Highlight(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ResetColor();
+            return "";
         }
     }
 }
