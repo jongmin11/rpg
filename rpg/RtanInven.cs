@@ -55,20 +55,17 @@ namespace rpg
 
                 if (!isEquipped)
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"{item.Name}을(를) 장착하시겠습니까? (Y/N)");
-                    Console.ResetColor();
+                    ConsoleHelper.Highlight($"{item.Name}을(를) 장착하시겠습니까? (Y/N)", ConsoleColor.White);
+                    Console.WriteLine();
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"{item.Name}을(를) 해제하시겠습니까? (Y/N)");
-                    Console.ResetColor();
+                    ConsoleHelper.Highlight($"{item.Name}을(를) 해제하시겠습니까? (Y/N)", ConsoleColor.White);
+                    Console.WriteLine();
                 }
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(">>");
-                Console.ResetColor();
+                ConsoleHelper.Highlight(">>", ConsoleColor.Yellow);
+                
                 string? confirm = Console.ReadLine();
 
                 if (confirm?.ToUpper() == "Y")
@@ -80,23 +77,20 @@ namespace rpg
                         if (i != invItem && i.IsEquipped && i.ItemData.Slot == item.Slot)
                         {
                             i.IsEquipped = false;
-                            Console.ForegroundColor= ConsoleColor.Yellow;
-                            Console.WriteLine($"기존 {i.ItemData.Name}이(가) 해제되었습니다.");
-                            Console.ResetColor();
+                            ConsoleHelper.Highlight($"기존 {i.ItemData.Name}이(가) 해제되었습니다.", ConsoleColor.Yellow);
+                            Console.WriteLine();
                         }
                      }
 
                         invItem.IsEquipped = true;
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"{item.Name}이(가) 장착되었습니다.");
-                        Console.ResetColor();
-                   }
+                        ConsoleHelper.Highlight($"{item.Name}이(가) 장착되었습니다.", ConsoleColor.Yellow);
+                        Console.WriteLine();
+                    }
                    else
                    {
                         invItem.IsEquipped = false;
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"{item.Name}이(가) 해제되었습니다.");
-                        Console.ResetColor();
+                        ConsoleHelper.Highlight($"{item.Name}이(가) 해제되었습니다.", ConsoleColor.Yellow);
+                        Console.WriteLine();
                    }
                 }
                 else
@@ -126,9 +120,7 @@ namespace rpg
 
                 if (invItem.IsEquipped)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("[E] ");
-                    Console.ResetColor();
+                    ConsoleHelper.Highlight("[E] ", ConsoleColor.Green);
                 }
 
                 Console.WriteLine($"{item.Name}| 슬롯: {item.Slot} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");

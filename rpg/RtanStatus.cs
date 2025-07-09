@@ -67,9 +67,8 @@
         public void Show()
         {
             var (totalAttack, totalDefence) = GetTotalStats();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("===========상태 보기==========");
-            Console.ResetColor();
+            ConsoleHelper.Highlight("===========상태 보기==========", ConsoleColor.Yellow);
+            Console.WriteLine();
             Console.WriteLine("현재 나의 캐릭터 상태");
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"이름:{Name} 직업:{(job)}");
@@ -77,9 +76,8 @@
             Console.WriteLine($"방어력: {totalDefence} {(totalDefence != defense ? $"({defense} + {totalDefence - defense})" : "")}");
             Console.WriteLine($"체력: {health}");
             Console.Write("Gold: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{gold}");
-            Console.ResetColor();
+            ConsoleHelper.Highlight($"{gold}", ConsoleColor.Yellow);
+            Console.WriteLine();
             Console.WriteLine("[장착 중인 아이템]");
             foreach (var invItem in GameData.Inventory)
             {

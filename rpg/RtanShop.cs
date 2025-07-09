@@ -8,15 +8,11 @@ namespace rpg
         {
             while (true)
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("====================상점====================");
-                Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.White; 
-                Console.Write("\t\t[보유 Gold]:");
-                Console.ResetColor();
-                Console.ForegroundColor= ConsoleColor.Yellow;
-                Console.WriteLine($" {GameData.Player.Gold}");
-                Console.ResetColor();
+                ConsoleHelper.Highlight("====================상점====================", ConsoleColor.White);
+                Console.WriteLine();
+                ConsoleHelper.Highlight("\t\t[보유 Gold]:", ConsoleColor.White);
+                ConsoleHelper.Highlight($" {GameData.Player.Gold}", ConsoleColor.Yellow);
+                Console.WriteLine();
                 PrintShopItems();
                 PrintOption("\n0. 나가기");
                 Console.WriteLine("\n구매할 아이템번호를 입력하세요");
@@ -47,9 +43,9 @@ namespace rpg
         }
         private void PrintShopItems()
         {
-            Console.ForegroundColor= ConsoleColor.White;
-            Console.WriteLine("\n\t\t[판매 목록]\n");
-            Console.ResetColor();
+            
+            ConsoleHelper.Highlight("\n\t\t[판매 목록]\n", ConsoleColor.White);
+            Console.WriteLine();
 
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
@@ -60,7 +56,7 @@ namespace rpg
 
                 if (isPurchased)
                 {
-                    Highlight("[구매완료]", ConsoleColor.Green);
+                    ConsoleHelper.Highlight("[구매완료]", ConsoleColor.Green);
                 }
                 else
                 {
@@ -77,15 +73,13 @@ namespace rpg
 
             if (GameData.Inventory.Any(x => x.ItemData == item))
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("이미 구매한 아이템입니다.");
-                Console.ResetColor();
+                ConsoleHelper.Highlight("이미 구매한 아이템입니다.", ConsoleColor.Green);
+                Console.WriteLine();
                 return;
             }
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"정말 {item.Name}을(를) 구매하시겠습니까? (Y/N)");
-            Console.ResetColor();
+            ConsoleHelper.Highlight($"정말 {item.Name}을(를) 구매하시겠습니까? (Y/N)", ConsoleColor.White);
+            Console.WriteLine();
             PrintPrompt();
             string? confirm = Console.ReadLine();
 
@@ -96,11 +90,11 @@ namespace rpg
             }
 
             if (GameData.Player.Gold < price)
-            { 
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Gold가 부족합니다!");
-                Console.WriteLine($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold");
-                Console.ResetColor();
+            {
+                ConsoleHelper.Highlight("Gold가 부족합니다!", ConsoleColor.Magenta);
+                Console.WriteLine();
+                ConsoleHelper.Highlight($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold", ConsoleColor.Magenta);
+                Console.WriteLine();
                 return;
             }
 
@@ -108,9 +102,8 @@ namespace rpg
             
             if(GameData.AddItem(item))
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}");
-                Console.ResetColor();
+                ConsoleHelper.Highlight($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}", ConsoleColor.Green);
+                Console.WriteLine();
             }
             else
             {
