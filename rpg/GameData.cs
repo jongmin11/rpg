@@ -2,10 +2,10 @@
 {
     public static class GameData
     {
-        public static RtanStatus Player = new RtanStatus();
+        public static RtanStatus Player { get; } = new();
         public static List<RtanInven.RtanItem> Inventory = new List<RtanInven.RtanItem>()
             {
-                new RtanInven.RtanItem(ItemDB.Items[0]) { IsEquipped = true } //인덱스[0] 낡은 검 기본 지급 + 장착 
+                new RtanInven.RtanItem(ItemDB.Items[0]) { IsEquipped = true }  
             };
        } 
 
