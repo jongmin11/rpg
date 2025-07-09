@@ -58,7 +58,7 @@ namespace rpg
         private void PrintShopItems()
         {
             Console.WriteLine("[판매 목록]");
-            for (int i = 0; i <= ItemDB.Items.Count; i++)
+            for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
                 int price = (item.Attack + item.Defense) * 100;
