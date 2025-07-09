@@ -63,7 +63,7 @@ namespace rpg
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
-                int price = (item.Attack + item.Defense) * 100;
+                int price = item.Price;
                 string status = purchased[i] 
                     ? Highlight("[구매완료]", ConsoleColor.Green)
                     : $"가격: {price} Gold";
@@ -74,11 +74,13 @@ namespace rpg
         private void ProcessPurchase(int index)
         {
             var item = ItemDB.Items[index];
-            int price = (item.Attack + item.Defense) * 100;
+            int price = item.Price;
 
             if (purchased[index])
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("이미 구매한 아이템입니다.");
+                Console.ResetColor();
                 return;
             }
 
@@ -92,14 +94,21 @@ namespace rpg
                 return;
             }
 
-            if (GameData.Player.Gold >= price)
-            {
-                GameData.Player.Gold -= price;
-                GameData.Inventory.Add(new RtanInven.RtanItem(item));
-                purchased[index] = true;
-                Console.WriteLine($"{item.Name} 구매 완료! 남은 Gold: {GameData.Player.Gold}");
+            if (GameData.Player.Gold < price)
+            { 
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Gold가 부족합니다!");
+                Console.WriteLine($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold");
+                Console.ResetColor();
+                return;
             }
-            else { Console.WriteLine("Gold가 부족합니다"); }
+
+            GameData.Player.Gold -= price;
+            GameData.Inventory.Add(new RtanInven.RtanItem(item));
+            purchased[index] = true;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}");
+            Console.ResetColor();
         }
         private void PrintOption(string option)
         { 
