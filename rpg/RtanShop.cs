@@ -50,13 +50,24 @@ namespace rpg
             Console.ForegroundColor= ConsoleColor.White;
             Console.WriteLine("\n\t\t[판매 목록]\n");
             Console.ResetColor();
+
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
                 int price = item.Price;
                 bool isPurchased = GameData.Inventory.Any(x => x.ItemData == item);
-                string status = isPurchased ? Highlight("[구매완료]", ConsoleColor.Green) : $"가격: {price} Gold";
-                Console.WriteLine($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {status}");
+                Console.Write($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | ");
+
+                if (isPurchased)
+                {
+                    Highlight("[구매완료]", ConsoleColor.Green);
+                }
+                else
+                {
+                    Console.Write($"가격: {price} Gold");
+                }
+
+                Console.WriteLine();
             }
         }
         private void ProcessPurchase(int index)
@@ -120,10 +131,9 @@ namespace rpg
         {
             return ConsoleHelper.GetInput();
         }
-        private string Highlight(string text, ConsoleColor color)
+        private void Highlight(string text, ConsoleColor color)
         {
             ConsoleHelper.Highlight(text, color);
-            return "";
         }
     }
 }

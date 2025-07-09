@@ -77,7 +77,7 @@ namespace rpg
                    { 
                      foreach (var i in GameData.Inventory)
                      {
-                        if (i.IsEquipped && i.ItemData.Slot == item.Slot)
+                        if (i != invItem && i.IsEquipped && i.ItemData.Slot == item.Slot)
                         {
                             i.IsEquipped = false;
                             Console.ForegroundColor= ConsoleColor.Yellow;
