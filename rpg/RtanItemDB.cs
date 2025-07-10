@@ -9,10 +9,10 @@ namespace rpg
         public int Attack { get; }
         public int Defense { get; }
         public EquipmentSlot Slot { get; }
-        public RtanItemDB(string name, string desc, int atk, int def, int price, EquipmentSlot slot)
+        public RtanItemDB(string name, string desc, int atk, int def, int price, EquipmentSlot slot) //아이템 정보를받아 RtanItemDB 객체의속성을 설정합니다.
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            Description = desc ?? throw new ArgumentNullException(nameof(desc));
+            Name = name ?? throw new ArgumentNullException(nameof(name));//name이 null이면 ArgumentNullException을 던져 객체생성을 즉시중단합니다.
+            Description = desc ?? throw new ArgumentNullException(nameof(desc));//같은뜻
             Attack = atk;
             Defense = def;
             Price = price;

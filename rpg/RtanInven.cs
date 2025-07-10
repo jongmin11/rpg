@@ -109,7 +109,7 @@ namespace rpg
 
             var sorted = GameData.Inventory
                 .OrderByDescending(i => i.IsEquipped)
-                .ToList();
+                .ToList();// 장착한 아이템을 ture인지 false인지 구분후 true면 위쪽으로배치 내림차순으로
 
             for (int i = 0; i < sorted.Count; i++)
             {
@@ -132,8 +132,8 @@ namespace rpg
 
         public class RtanItem
         {
-            public RtanItemDB ItemData { get; }
-            public bool IsEquipped { get; set; }
+            public RtanItemDB ItemData { get; }// 르탄 데이터베이스에서 아이템데이터를 읽을수만 있음
+            public bool IsEquipped { get; set; } //장착값을 어디서나 읽고 쓸수잇음
             public RtanItem(RtanItemDB itemData)
             {
                 ItemData = itemData;

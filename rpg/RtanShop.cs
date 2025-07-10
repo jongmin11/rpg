@@ -14,7 +14,7 @@ namespace rpg
                 ConsoleHelper.Highlight($" {GameData.Player.Gold}", ConsoleColor.Yellow);
                 Console.WriteLine();
                 PrintShopItems();
-                PrintOption("\n0. 나가기");
+                PrintOption("\n0. 나가기\n");
                 Console.WriteLine("\n구매할 아이템번호를 입력하세요");
                 string? input = GetInput();
 
