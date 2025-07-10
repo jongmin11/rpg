@@ -70,8 +70,8 @@
             ConsoleHelper.Highlight("상태 보기", ConsoleColor.Yellow);
             Console.WriteLine();
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
-            Console.WriteLine($"Lv. {level}");
-            Console.WriteLine($"이름:{Name} 직업:{(job)}");
+            Console.WriteLine($"Lv. {level:D2}");
+            Console.WriteLine($"{Name} ( {job} )");
             Console.WriteLine($"공격력: {totalAttack} {(totalAttack != attack ? $"({attack} + {totalAttack - attack})" : "")}");
             Console.WriteLine($"방어력: {totalDefence} {(totalDefence != defense ? $"({defense} + {totalDefence - defense})" : "")}");
             Console.WriteLine($"체력: {health}");

@@ -118,7 +118,9 @@ namespace rpg
 
                 if (invItem.IsEquipped)
                 {
-                    ConsoleHelper.Highlight("[E] ", ConsoleColor.Green);
+                    Console.Write("[");
+                    ConsoleHelper.Highlight("E", ConsoleColor.Green);
+                    Console.Write("]");
                 }
 
                 Console.WriteLine($"{item.Name}| 슬롯: {item.Slot} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | {item.Description}");

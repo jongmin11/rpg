@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace rpg
 {
@@ -10,12 +11,10 @@ namespace rpg
             {
                 ConsoleHelper.Highlight("====================상점====================", ConsoleColor.White);
                 Console.WriteLine();
-                ConsoleHelper.Highlight("\t\t[보유 Gold]:", ConsoleColor.White);
-                ConsoleHelper.Highlight($" {GameData.Player.Gold}", ConsoleColor.Yellow);
-                Console.WriteLine();
+                Console.WriteLine($"[보유 Gold]: \n{GameData.Player.Gold} G\n");
                 PrintShopItems();
-                PrintOption("\n0. 나가기\n");
-                Console.WriteLine("\n구매할 아이템번호를 입력하세요");
+                Console.WriteLine("\n0. 나가기\n");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
                 string? input = GetInput();
 
                 if (!int.TryParse(input, out int choice))
@@ -43,27 +42,23 @@ namespace rpg
         }
         private void PrintShopItems()
         {
-            
-            ConsoleHelper.Highlight("\n\t\t[판매 목록]\n", ConsoleColor.White);
-            Console.WriteLine();
+            Console.WriteLine("[아이템 목록]");
 
             for (int i = 0; i < ItemDB.Items.Count; i++)
             {
                 var item = ItemDB.Items[i];
-                int price = item.Price;
+                string stat = item.Attack > 0
+                    ? $"공격력 +{item.Attack}"
+                    : $"방어력 +{item.Defense}";
                 bool isPurchased = GameData.Inventory.Any(x => x.ItemData == item);
-                Console.Write($"{i + 1}. {item.Name} | {item.Description} | 공격력 +{item.Attack} | 방어력 +{item.Defense} | ");
+                string priceText = isPurchased ? "구매완료" : $"{item.Price} G";
 
-                if (isPurchased)
-                {
-                    ConsoleHelper.Highlight("[구매완료]", ConsoleColor.Green);
-                }
-                else
-                {
-                    Console.Write($"가격: {price} Gold");
-                }
-
-                Console.WriteLine();
+                Console.WriteLine(
+                $"- {i + 1} {item.Name.PadRight(12)} | " +
+                $"{stat.PadRight(8)} | " +
+                $"{item.Description.PadRight(40)} | " +
+                $"{priceText.PadLeft(8)}"
+                );
             }
         }
         private void ProcessPurchase(int index)
@@ -73,8 +68,8 @@ namespace rpg
 
             if (GameData.Inventory.Any(x => x.ItemData == item))
             {
-                ConsoleHelper.Highlight("이미 구매한 아이템입니다.", ConsoleColor.Green);
-                Console.WriteLine();
+                Console.WriteLine("이미 구매한 아이템입니다.");
+
                 return;
             }
 
@@ -91,7 +86,7 @@ namespace rpg
 
             if (GameData.Player.Gold < price)
             {
-                ConsoleHelper.Highlight("Gold가 부족합니다!", ConsoleColor.Magenta);
+                ConsoleHelper.Highlight("Gold가 부족합니다.", ConsoleColor.Magenta);
                 Console.WriteLine();
                 ConsoleHelper.Highlight($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold", ConsoleColor.Magenta);
                 Console.WriteLine();
@@ -102,7 +97,7 @@ namespace rpg
             
             if(GameData.AddItem(item))
             {
-                ConsoleHelper.Highlight($"{item.Name} 구매완료! 남은 Gold: {GameData.Player.Gold}", ConsoleColor.Green);
+                Console.WriteLine($"{item.Name} 구매완료했습니다.");
                 Console.WriteLine();
             }
             else
