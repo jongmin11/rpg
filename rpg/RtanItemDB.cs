@@ -19,7 +19,7 @@ namespace rpg
             Slot = slot;
         }
 
-     }
+    }
     public static class ItemDB
     {
         public static IReadOnlyList<RtanItemDB> Items { get; } = new List<RtanItemDB>
@@ -32,7 +32,6 @@ namespace rpg
             new ("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", 5, 0, 1500, EquipmentSlot.무기)
         };
     }
-
     public enum EquipmentSlot
     {
         무기,

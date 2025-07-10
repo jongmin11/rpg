@@ -13,7 +13,7 @@
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{option}"); //option값은 고정되어있지않음 상황마다 부여함
             Console.ResetColor();
-            Console.WriteLine("어떤 행동을 하시겠습니까?");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
         }
         public static void Highlight(string text, ConsoleColor color) //색깔적용 코드
         {
@@ -45,7 +45,7 @@
             Console.WriteLine("\n어떤 행동을 하시겠습니까?");
             ConsoleHelper.Highlight("=====================================================================================", ConsoleColor.Green);
             Console.WriteLine();
-        } 
+        }
     }
 } 
 

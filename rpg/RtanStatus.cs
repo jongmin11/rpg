@@ -67,17 +67,15 @@
         public void Show()
         {
             var (totalAttack, totalDefence) = GetTotalStats();
-            ConsoleHelper.Highlight("===========상태 보기==========", ConsoleColor.Yellow);
+            ConsoleHelper.Highlight("상태 보기", ConsoleColor.Yellow);
             Console.WriteLine();
-            Console.WriteLine("현재 나의 캐릭터 상태");
+            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"이름:{Name} 직업:{(job)}");
             Console.WriteLine($"공격력: {totalAttack} {(totalAttack != attack ? $"({attack} + {totalAttack - attack})" : "")}");
             Console.WriteLine($"방어력: {totalDefence} {(totalDefence != defense ? $"({defense} + {totalDefence - defense})" : "")}");
             Console.WriteLine($"체력: {health}");
-            Console.Write("Gold: ");
-            ConsoleHelper.Highlight($"{gold}", ConsoleColor.Yellow);
-            Console.WriteLine();
+            Console.WriteLine($"Gold: {gold}");
             Console.WriteLine("[장착 중인 아이템]");
             foreach (var invItem in GameData.Inventory)
             {
@@ -86,14 +84,15 @@
                     Console.WriteLine($"{invItem.ItemData.Name} ({invItem.ItemData.Slot})");
                 }
             }
-            PrintOption("\n0. 나가기\n");
+            Console.WriteLine("\n0. 나가기\n");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
 
             while (true)
             {
                 string? Input = GetInput();
                 if (!sbyte.TryParse(Input, out sbyte choice))
                 {
-                    Console.WriteLine("숫자를 입력해 주세요.");
+                    Console.WriteLine("잘못된 입력입니다");
                     continue;
                 }
 
@@ -102,7 +101,7 @@
                     case 0: 
                         return;
                     default:
-                        Console.WriteLine("올바른 번호를 입력하세요.");
+                        Console.WriteLine("잘못된 입력입니다.");
                         break;
                 }
             }

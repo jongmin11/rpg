@@ -1,6 +1,5 @@
 ﻿using System.Reflection.Metadata;
 using System.Security.Cryptography;
-
 namespace rpg
 {
     public class RtanInven
@@ -65,7 +64,6 @@ namespace rpg
                 }
 
                 ConsoleHelper.Highlight(">>", ConsoleColor.Yellow);
-                
                 string? confirm = Console.ReadLine();
 
                 if (confirm?.ToUpper() == "Y") //confirm이 null일때 false처리 And y를입력해도 대문자로 변환시킴
