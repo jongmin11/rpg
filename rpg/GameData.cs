@@ -3,7 +3,7 @@
     public static class GameData
     {
         public static RtanStatus Player { get; } = new(); //C# 싱글톤역할
-        public static List<RtanInven.RtanItem> _inventory = new List<RtanInven.RtanItem>(); //어디서든지 불러올수잇는 인벤토리 리스트 빈상태로 초기화 
+        private static List<RtanInven.RtanItem> _inventory = new List<RtanInven.RtanItem>(); //어디서든지 불러올수잇는 인벤토리 리스트 빈상태로 초기화 
         public static IReadOnlyList<RtanInven.RtanItem> Inventory => _inventory;//안전하게 인벤토리 읽기전용
         public static bool AddItem(RtanItemDB item) // 어떤아이템을 얻으면 RtanItemDB 여기로옴
         {

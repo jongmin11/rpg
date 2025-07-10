@@ -52,7 +52,6 @@ namespace rpg
                     : $"방어력 +{item.Defense}";
                 bool isPurchased = GameData.Inventory.Any(x => x.ItemData == item);
                 string priceText = isPurchased ? "구매완료" : $"{item.Price} G";
-
                 Console.WriteLine(
                 $"- {i + 1} {item.Name.PadRight(12)} | " +
                 $"{stat.PadRight(8)} | " +
@@ -86,10 +85,8 @@ namespace rpg
 
             if (GameData.Player.Gold < price)
             {
-                ConsoleHelper.Highlight("Gold가 부족합니다.", ConsoleColor.Magenta);
-                Console.WriteLine();
-                ConsoleHelper.Highlight($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold", ConsoleColor.Magenta);
-                Console.WriteLine();
+                Console.WriteLine("Gold가 부족합니다.");
+                Console.WriteLine($"필요: {price} Gold, 현재: {GameData.Player.Gold} Gold");
                 return;
             }
 
@@ -98,7 +95,6 @@ namespace rpg
             if(GameData.AddItem(item))
             {
                 Console.WriteLine($"{item.Name} 구매완료했습니다.");
-                Console.WriteLine();
             }
             else
             {

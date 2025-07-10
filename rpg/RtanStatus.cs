@@ -89,7 +89,7 @@
 
             while (true)
             {
-                string? Input = GetInput();
+                string? Input = ConsoleHelper.GetInput();
                 if (!sbyte.TryParse(Input, out sbyte choice))
                 {
                     Console.WriteLine("잘못된 입력입니다");
@@ -106,9 +106,6 @@
                 }
             }
         }
-        private void PrintOption(string option) => ConsoleHelper.PrintOption(option);
-        private void PrintPrompt() => ConsoleHelper.PrintPrompt();
-        private string? GetInput() => ConsoleHelper.GetInput();
     }
 }
 

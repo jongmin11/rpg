@@ -18,7 +18,6 @@ namespace rpg
             Price = price;
             Slot = slot;
         }
-
     }
     public static class ItemDB
     {
