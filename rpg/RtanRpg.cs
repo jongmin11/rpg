@@ -11,7 +11,7 @@
 
                 if (string.IsNullOrWhiteSpace(pick))
                 {
-                    Console.WriteLine("입력이 비어있습니다.");
+                    ConsoleHelper.Highlight("입력이 비어있습니다.\n", ConsoleColor.White);
                     continue;
                 }
 

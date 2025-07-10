@@ -21,7 +21,7 @@
             Console.Write(text);
             Console.ResetColor();
         }
-        public static string? GetInput()
+        public static string? GetInput() //사용자가 아무것도 입력하지않으면 반환
         {
             PrintPrompt();
             return Console.ReadLine();

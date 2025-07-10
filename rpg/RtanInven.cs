@@ -35,7 +35,7 @@ namespace rpg
             PrintOption("\n0. 뒤로 가기");
             string? input = GetInput();
 
-            if (!int.TryParse(input, out int index))
+            if (!int.TryParse(input, out int index)) // input이 정수로 전해지지않으면...
             {
                 Console.WriteLine("숫자를 입력해주세요.");
                 return;
@@ -45,7 +45,7 @@ namespace rpg
 
             var sortedList = GameData.Inventory
                 .OrderByDescending(i => i.IsEquipped)
-                .ToList();
+                .ToList(); // 장착한 아이템을 ture인지 false인지 구분후 true면 위쪽으로배치 내림차순으로
 
             if (index > 0 && index <= sortedList.Count)
             {
@@ -68,27 +68,27 @@ namespace rpg
                 
                 string? confirm = Console.ReadLine();
 
-                if (confirm?.ToUpper() == "Y")
+                if (confirm?.ToUpper() == "Y") //confirm이 null일때 false처리 And y를입력해도 대문자로 변환시킴
                 {
                    if (!isEquipped)
                    { 
-                     foreach (var i in GameData.Inventory)
+                     foreach (var i in GameData.Inventory) //인벤토리내에 있는 리스트 모두검사
                      {
-                        if (i != invItem && i.IsEquipped && i.ItemData.Slot == item.Slot)
+                        if (i != invItem && i.IsEquipped && i.ItemData.Slot == item.Slot) // i가 선택한 invItem이아니고,장착된상태이고,같은 Slot아이템일떄
                         {
-                            i.IsEquipped = false;
+                            i.IsEquipped = false;//기존장비해제
                             ConsoleHelper.Highlight($"기존 {i.ItemData.Name}이(가) 해제되었습니다.", ConsoleColor.Yellow);
                             Console.WriteLine();
                         }
                      }
 
-                        invItem.IsEquipped = true;
+                        invItem.IsEquipped = true;//내가 선택한장비 장착
                         ConsoleHelper.Highlight($"{item.Name}이(가) 장착되었습니다.", ConsoleColor.Yellow);
                         Console.WriteLine();
-                    }
+                   }
                    else
                    {
-                        invItem.IsEquipped = false;
+                        invItem.IsEquipped = false; //이미 장착된 아이템 다시선택됐으면 해제
                         ConsoleHelper.Highlight($"{item.Name}이(가) 해제되었습니다.", ConsoleColor.Yellow);
                         Console.WriteLine();
                    }
